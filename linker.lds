@@ -34,13 +34,12 @@ SECTIONS
     /*  Virtually linked part of init code and data. Start/end is 4K aligned.
         This section is reclaimed after kernelInit completes.
     */
-    . = KERNEL_OFFSET;
 
-    .init.text . : AT(ADDR(.init.text) - KERNEL_OFFSET + PHYS_END)
+    .init.text . : 
     {
         *(.init)
     }
-    .init.data . : AT(ADDR(.init.data) - KERNEL_OFFSET + PHYS_END)
+    .init.data . : 
     {
         *(.init.data)
     }
@@ -50,23 +49,23 @@ SECTIONS
 
     /*  Virtually linked part of actual kernel code and data. Start/end is 4K aligned. */
 
-    .text . : AT(ADDR(.text) - KERNEL_OFFSET + PHYS_END)
+    .text . :
     {
         *(.text)
     }
 
-    .rodata . : AT(ADDR(.rodata) - KERNEL_OFFSET + PHYS_END)
+    .rodata . :
     {
         *(.rodata)
         *(.rodata.*)
     }
 
-    .data . : AT(ADDR(.data) - KERNEL_OFFSET + PHYS_END)
+    .data . :
     {
         *(.data) /* .data is empty, but linker crashes if it is not put here */
     }
 
-    .bss . : AT(ADDR(.bss) - KERNEL_OFFSET + PHYS_END)
+    .bss . :
     {
         *(.bss)
         *(COMMON)

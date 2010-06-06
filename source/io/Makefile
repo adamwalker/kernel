@@ -1,1 +1,1 @@
-C_SOURCES += io/serial.c
+C_SOURCES += io/serial.c io/string_io.c
