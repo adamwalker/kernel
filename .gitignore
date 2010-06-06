@@ -1,0 +1,6 @@
+*.o
+*.d
+kernel.elf
+kernel.elf.strip
+*.swp
+*.img
