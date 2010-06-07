@@ -17,6 +17,9 @@ struct gdt_ptr
 	unsigned int base;
 } __attribute__((packed));
 
+#define GDT_CODE_SEL 0x8
+#define GDT_DATA_SEL 0x10
+
 void gdt_install(void);
 
 #endif

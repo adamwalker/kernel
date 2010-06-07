@@ -41,7 +41,7 @@ LINKER_SCRIPT = ${SOURCE_ROOT}/linker.lds
 
 kernel.elf: ${OBJS} ${LINKER_SCRIPT}
 	@echo "[LD] $@"
-	${CC} ${CFLAGS} -T ${LINKER_SCRIPT} -o $@ ${OBJS} 
+	@${CC} ${CFLAGS} -T ${LINKER_SCRIPT} -o $@ ${OBJS} 
 
 %.elf.strip: %.elf
 	@echo "[STRIP] $@"
@@ -50,12 +50,12 @@ kernel.elf: ${OBJS} ${LINKER_SCRIPT}
 %.o: %.S | $(DIRECTORIES)
 	@$(call make-depend,$<,$@,$(subst .o,.d,$@))
 	@echo "[AS] $@"
-	${CC} ${CFLAGS} -c $< -o $@
+	@${CC} ${CFLAGS} -c $< -o $@
 
 %.o: %.c | $(DIRECTORIES)
 	@$(call make-depend,$<,$@,$(subst .o,.d,$@))
 	@echo "[CC] $@"
-	${CC} ${CFLAGS} -c $< -o $@
+	@${CC} ${CFLAGS} -c $< -o $@
 
 $(DIRECTORIES):
 	@echo "[MKDIR] $@"

@@ -20,7 +20,7 @@ static void gdt_set_gate(int num, unsigned long base, unsigned long limit, unsig
  
 void gdt_install(void)
 {
-	gp.limit = (sizeof(struct gdt_entry) * 6) - 1;
+	gp.limit = (sizeof(struct gdt_entry) * 3) - 1;
 	gp.base = (unsigned int)&gdt;
  
 	gdt_set_gate(0, 0, 0, 0, 0);

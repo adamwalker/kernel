@@ -11,7 +11,7 @@ gdt_flush:
 	mov %ax, %fs
 	mov %ax, %gs
 	mov %ax, %ss
-	jmp $0x08, $flush2
+	ljmp $0x08, $flush2
  
 flush2:
 	ret
