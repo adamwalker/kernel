@@ -19,6 +19,7 @@ struct gdt_ptr
 
 #define GDT_CODE_SEL 0x8
 #define GDT_DATA_SEL 0x10
+#define GDT_TSS_SEL 0x18
 
 void gdt_install(void);
 

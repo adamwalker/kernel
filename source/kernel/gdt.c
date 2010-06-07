@@ -1,7 +1,10 @@
 #include <gdt.h>
+#include <tss.h>
 
 struct gdt_entry gdt[3];
 struct gdt_ptr gp;
+
+extern tss_t the_tss;
  
 void gdt_flush(void);
  
@@ -20,12 +23,13 @@ static void gdt_set_gate(int num, unsigned long base, unsigned long limit, unsig
  
 void gdt_install(void)
 {
-	gp.limit = (sizeof(struct gdt_entry) * 3) - 1;
+	gp.limit = (sizeof(struct gdt_entry) * 4) - 1;
 	gp.base = (unsigned int)&gdt;
  
 	gdt_set_gate(0, 0, 0, 0, 0);
 	gdt_set_gate(1, 0, 0xFFFFFFFF, 0x9A, 0xCF);
 	gdt_set_gate(2, 0, 0xFFFFFFFF, 0x92, 0xCF);
+	gdt_set_gate(3, (unsigned int)&the_tss, sizeof(struct tss), 0x89, 0x40);
  
 	gdt_flush();
 }

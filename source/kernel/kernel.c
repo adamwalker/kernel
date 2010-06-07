@@ -7,6 +7,7 @@
 #include <paging.h>
 #include <idt.h>
 #include <pic.h>
+#include <tss.h>
 
 int PHYS_CODE main(int multiboot_magic, multiboot_info_t *multiboot_info_ptr) {
 
@@ -29,6 +30,8 @@ int PHYS_CODE main(int multiboot_magic, multiboot_info_t *multiboot_info_ptr) {
 	printf("asdf %x %d %x\n", 9, "str", 10);
 
 	puts("still alive\n");
+
+	tss_install();
 
 	*(char *)0xbfffffff = 0;
 
