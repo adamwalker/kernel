@@ -34,7 +34,7 @@ int PHYS_CODE main(int multiboot_magic, multiboot_info_t *multiboot_info_ptr) {
 
 	tss_install();
 
-	//*(char *)0xbfffffff = 0;
+	*(char *)0xbfffffff = 0;
 
 	assert(2>1);
 	assert(1>2);
