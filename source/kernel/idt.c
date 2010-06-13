@@ -3,8 +3,9 @@
 #include <isr.h>
 #include <util.h>
 #include <string_io.h>
+#include <section.h>
 
-struct idt_entry idt[256];
+HIGH_DATA struct idt_entry idt[256];
 struct idt_ptr idtp;
 
 static void idt_set_entry(int num, unsigned long offset, unsigned short sel, unsigned char type){

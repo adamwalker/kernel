@@ -10,6 +10,7 @@
 #include <tss.h>
 #include <assert.h>
 #include <pit.h>
+#include <linker.h>
 
 int main(int multiboot_magic, multiboot_info_t *multiboot_info_ptr) {
 
@@ -21,27 +22,34 @@ int main(int multiboot_magic, multiboot_info_t *multiboot_info_ptr) {
 
 	printf("Multiboot commandline: %s\n", (char *)multiboot_info_ptr->cmdline);
 
-	gdt_install();
+	printf("Kernel high start: %x, kernel high end: %x\n", KERNEL_HIGH_START, KERNEL_HIGH_END);
 
+	printf("Initialising Paging...");
 	init_paging();
+	printf("Done\n");
 
+	printf("Initialising GDT...");
+	gdt_install();
+	printf("Done\n");
+
+	printf("Initialising IDT...");
 	idt_install();
+	printf("Done\n");
 
-	PIC_remap(0x20, 0x28);
-
-	printf("asdf %x %d %x\n", 9, "str", 10);
-
-	puts("still alive\n");
-
+	printf("Initialising TSS...");
 	tss_install();
+	printf("Done\n");
 
+	printf("Remapping the PIC...");
+	PIC_remap(0x20, 0x28);
+	printf("Done\n");
+
+	printf("Setting the timer rate...");
 	timer_hz(100);
+	printf("Done\n");
 
 	//*(char *)0xbfffffff = 0;
 
-	//assert(2>1);
-	//assert(1>2);
-	
 	sti();
 
 	idle();

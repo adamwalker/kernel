@@ -2,8 +2,9 @@
 #include <string_io.h>
 #include <util.h>
 #include <pic.h>
+#include <section.h>
 
-char *exception_messages[] =
+HIGH_DATA char *exception_messages[] =
 {
     "Division By Zero",
     "Debug",
@@ -39,7 +40,7 @@ char *exception_messages[] =
     "Reserved",
 };
 
-void fault_handler(struct regs *r) {
+HIGH_CODE void fault_handler(struct regs *r) {
     if (r->int_no < 32) {
 		printf("%s exception, system halted\n", exception_messages[r->int_no]);
         halt();

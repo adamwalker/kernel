@@ -1,3 +1,5 @@
+.section .text.high
+
 #define INT_HANDLER_WITH_ERR_CODE(number)    \
 .global int_##number;                        \
 int_##number:                                \

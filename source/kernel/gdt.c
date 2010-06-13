@@ -1,7 +1,8 @@
 #include <gdt.h>
 #include <tss.h>
+#include <section.h>
 
-struct gdt_entry gdt[3];
+HIGH_DATA struct gdt_entry gdt[4];
 struct gdt_ptr gp;
 
 extern tss_t the_tss;

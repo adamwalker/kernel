@@ -3,6 +3,8 @@
 
 #define SECTION(X) __attribute__ ((section (X)))
 
-#define PHYS_CODE SECTION(".phys.text")
+#define HIGH_CODE SECTION(".text.high")
+#define HIGH_DATA SECTION(".data.high")
+#define HIGH_BSS  SECTION(".bss.high")
 
 #endif
