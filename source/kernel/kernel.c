@@ -10,7 +10,7 @@
 #include <tss.h>
 #include <assert.h>
 
-int PHYS_CODE main(int multiboot_magic, multiboot_info_t *multiboot_info_ptr) {
+int main(int multiboot_magic, multiboot_info_t *multiboot_info_ptr) {
 
 	if(multiboot_magic != MULTIBOOT_BOOTLOADER_MAGIC){
 		error("Must be booted by a multiboot compliant bootloader\n");

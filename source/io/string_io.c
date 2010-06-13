@@ -3,7 +3,7 @@
 #include <string_io.h>
 #include <stdarg.h>
 
-int PHYS_CODE puts(char *str){
+int puts(char *str){
 	int n = 0;
 	while(*str){
 		serial_send(*str);
