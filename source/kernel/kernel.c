@@ -11,8 +11,9 @@
 #include <assert.h>
 #include <pit.h>
 #include <linker.h>
+#include <malloc.h>
 
-int main(int multiboot_magic, multiboot_info_t *multiboot_info_ptr) {
+int main(int multiboot_magic, multiboot_info_t *mbi) {
 
 	if(multiboot_magic != MULTIBOOT_BOOTLOADER_MAGIC){
 		error("Must be booted by a multiboot compliant bootloader\n");
@@ -20,9 +21,14 @@ int main(int multiboot_magic, multiboot_info_t *multiboot_info_ptr) {
 		puts("Detected multiboot bootloader\n");
 	}
 
-	printf("Multiboot commandline: %s\n", (char *)multiboot_info_ptr->cmdline);
+	printf("Multiboot commandline: %s\n", (char *)mbi->cmdline);
 
 	printf("Kernel high start: %x, kernel high end: %x\n", KERNEL_HIGH_START, KERNEL_HIGH_END);
+
+	printf("Physical memory low start: %x, end: %x\n", 0, mbi->mem_lower << 10);
+	printf("Physical memory high start: %x, end: %x\n", 0x100000, 0x100000 + (mbi->mem_upper << 10));
+
+	printf("Bootloader provided %x module(s)\n", mbi->mods_count);
 
 	printf("Initialising Paging...");
 	init_paging();
@@ -48,7 +54,9 @@ int main(int multiboot_magic, multiboot_info_t *multiboot_info_ptr) {
 	timer_hz(100);
 	printf("Done\n");
 
-	//*(char *)0xbfffffff = 0;
+	init_mmap(KERNEL_PHYS_END, mbi->mem_upper << 10);
+
+	*(char *)0xbfffffff = 0;
 
 	sti();
 

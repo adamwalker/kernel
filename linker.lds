@@ -76,6 +76,8 @@ SECTIONS
 
 	_kernel_high_end = . - KERNEL_HIGH_BASE + LOW_END;
 
+	_kernel_phys_end = . - KERNEL_HIGH_BASE + LOW_END;
+
     /DISCARD/ :
     {
         *(.*)
