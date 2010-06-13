@@ -41,7 +41,7 @@ char *exception_messages[] =
 
 void fault_handler(struct regs *r) {
     if (r->int_no < 32) {
-		printf("%s excption, system halted\n", exception_messages[r->int_no]);
+		printf("%s exception, system halted\n", exception_messages[r->int_no]);
         halt();
     } else {
 		printf("interrupt %x\n", r->int_no);
