@@ -56,3 +56,35 @@ int atoi(const char *str, int *result) {
     *result = negate ? -val : val;
     return 0;
 }
+
+//Completely unoptimised
+void *memcpy(void *dest, const void *src, int size){
+	int i;
+	for(i=0; i<size; i++)
+		((char *)dest)[i] = ((char *)src)[i];
+	return dest;
+}
+
+void *memset(void *dest, int val, int size){
+	int i;
+	for(i=0; i<size; i++)
+		((char *)dest)[i] = val;
+	return dest;
+}
+
+int strlen(const char *str){
+	int i=0;
+	while(str[i] != '\0')
+		i++;
+	return i;
+}
+
+char *strncpy(char *dest, const char *src, int size){
+	int i;
+	for(i=0; i<size && src[i] != 0; i++)
+		dest[i] = src[i];
+	for(; i<size; i++)
+		dest[i] = '\0';
+	return dest;
+}
+
