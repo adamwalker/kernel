@@ -9,6 +9,7 @@
 #include <pic.h>
 #include <tss.h>
 #include <assert.h>
+#include <pit.h>
 
 int main(int multiboot_magic, multiboot_info_t *multiboot_info_ptr) {
 
@@ -34,11 +35,15 @@ int main(int multiboot_magic, multiboot_info_t *multiboot_info_ptr) {
 
 	tss_install();
 
-	*(char *)0xbfffffff = 0;
+	timer_hz(100);
 
-	assert(2>1);
-	assert(1>2);
+	//*(char *)0xbfffffff = 0;
 
-	for(;;);
+	//assert(2>1);
+	//assert(1>2);
+	
+	sti();
+
+	idle();
 	return 1;
 }

@@ -1,6 +1,8 @@
 #include <idt.h>
 #include <gdt.h>
 #include <isr.h>
+#include <util.h>
+#include <string_io.h>
 
 struct idt_entry idt[256];
 struct idt_ptr idtp;
@@ -52,16 +54,33 @@ void (*isrs[])(void) =
 	int_1d,
 	int_1e,
 	int_1f,
+	int_20,
+	int_21,
+	int_22,
+	int_23,
+	int_24,
+	int_25,
+	int_26,
+	int_27,
+	int_28,
+	int_29,
+	int_2a,
+	int_2b,
+	int_2c,
+	int_2d,
+	int_2e,
+	int_2f,
 };
 
-void idt_install(void)
-{
+void idt_install(void){
 	int i;
 
 	idtp.size = (sizeof (struct idt_entry) * 256) - 1;
 	idtp.base = (unsigned int)&idt;
 
-	for(i=0; i<0x20; i++){
+	memset(idt, 0, sizeof(idt));
+
+	for(i=0; i<0x30; i++){
 		idt_set_entry(i, (unsigned int)isrs[i], GDT_CODE_SEL, 0x8e);
 	}
  

@@ -42,5 +42,21 @@ extern void int_1c(void);
 extern void int_1d(void);
 extern void int_1e(void);
 extern void int_1f(void);
+extern void int_20(void);
+extern void int_21(void);
+extern void int_22(void);
+extern void int_23(void);
+extern void int_24(void);
+extern void int_25(void);
+extern void int_26(void);
+extern void int_27(void);
+extern void int_28(void);
+extern void int_29(void);
+extern void int_2a(void);
+extern void int_2b(void);
+extern void int_2c(void);
+extern void int_2d(void);
+extern void int_2e(void);
+extern void int_2f(void);
 
 #endif

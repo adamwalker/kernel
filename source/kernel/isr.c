@@ -1,6 +1,7 @@
 #include <isr.h>
 #include <string_io.h>
 #include <util.h>
+#include <pic.h>
 
 char *exception_messages[] =
 {
@@ -42,6 +43,9 @@ void fault_handler(struct regs *r) {
     if (r->int_no < 32) {
 		printf("%s excption, system halted\n", exception_messages[r->int_no]);
         halt();
-    }
+    } else {
+		printf("interrupt %x\n", r->int_no);
+		PIC_send_EOI(r->int_no - 0x20);
+	}
 }
 
