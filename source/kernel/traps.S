@@ -89,3 +89,7 @@ isr_common_stub:
     add $0x8, %esp 
     iret           
 
+.global handle_sysenter
+
+handle_sysenter:
+	jmp handle_sysenter

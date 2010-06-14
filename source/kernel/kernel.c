@@ -12,6 +12,7 @@
 #include <pit.h>
 #include <linker.h>
 #include <malloc.h>
+#include <sysenter.h>
 
 int main(int multiboot_magic, multiboot_info_t *mbi) {
 
@@ -54,7 +55,13 @@ int main(int multiboot_magic, multiboot_info_t *mbi) {
 	timer_hz(100);
 	printf("Done\n");
 
+	printf("Setting up sysenter MSRs...");
+	setup_sysenter_msrs();
+	printf("Done\n");
+
 	init_mmap(KERNEL_PHYS_END, mbi->mem_upper << 10);
+
+	asm volatile ("sysenter");
 
 	*(char *)0xbfffffff = 0;
 

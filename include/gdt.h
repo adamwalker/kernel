@@ -17,9 +17,12 @@ struct gdt_ptr
 	unsigned int base;
 } __attribute__((packed));
 
-#define GDT_CODE_SEL 0x8
-#define GDT_DATA_SEL 0x10
-#define GDT_TSS_SEL 0x18
+#define GDT_NULL 0x0
+#define GDT_CS_0 0x8
+#define GDT_DS_0 0x10
+#define GDT_CS_3 0x18
+#define GDT_DS_3 0x20
+#define GDT_TSS  0x28
 
 void gdt_install(void);
 

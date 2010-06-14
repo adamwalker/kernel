@@ -82,7 +82,7 @@ void idt_install(void){
 	memset(idt, 0, sizeof(idt));
 
 	for(i=0; i<0x30; i++){
-		idt_set_entry(i, (unsigned int)isrs[i], GDT_CODE_SEL, 0x8e);
+		idt_set_entry(i, (unsigned int)isrs[i], GDT_CS_0, 0x8e);
 	}
  
 	asm volatile (	"lidt %0\n" :: "m" (idtp));
