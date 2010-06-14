@@ -18,4 +18,7 @@ static inline void cli(void){
 }
 #define NULL ((void *)0)
 
+#define BIT(x) (1<<(x))
+#define MASK(x) (BIT(x) - 1)
+
 #endif

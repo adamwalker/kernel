@@ -9,17 +9,17 @@ unsigned long highpagetable[1024] __attribute__ ((aligned (PAGE_SIZE)));
 void init_paging(void){
 	int k = 0;
  
-	for(k = 0; k < 1024; k++){
-		lowpagetable[k] = (k * 4096) | 0x3;	
+	for(k = 0; k < PT_ENTRIES; k++){
+		lowpagetable[k] = (k * PAGE_SIZE) | PRESENT | WRITABLE;
 		kernelpagedir[k] = 0;
 	}
 
-	for(k = 0; k < 1024; k++){
-		highpagetable[k] = (KERNEL_HIGH_START + (k * 4096)) | 0x3;
+	for(k = 0; k < PT_ENTRIES; k++){
+		highpagetable[k] = (KERNEL_HIGH_START + (k * PAGE_SIZE)) | PRESENT | WRITABLE;
 	}
  
-	kernelpagedir[0] = (unsigned long)lowpagetable | 0x3;
-	kernelpagedir[0x3c0] = (unsigned long)highpagetable | 0x3;
+	kernelpagedir[0] = (unsigned long)lowpagetable | PRESENT | WRITABLE;
+	kernelpagedir[PDIR_PART(KERNEL_HIGH)] = (unsigned long)highpagetable | PRESENT | WRITABLE;
  
 	asm volatile (	"mov %0, %%eax\n"
 					"mov %%eax, %%cr3\n"
