@@ -1,0 +1,5 @@
+Not really a kernel. Just sets up paging, interrupts and syscalls, then halts. 
+
+To run:
+
+qemu-system-i386 -kernel build/kernel.elf.strip -nographic
